@@ -1,6 +1,37 @@
 const { INPUT_METHOD } = require('deckboard-kit');
 const { BusProperties, StripProperties } = require('voicemeeter-connector');
 
+const mapPropsToSelection = props =>
+	Object.keys(props).map(x => ({
+		value: props[x],
+		label: x
+	}))
+
+const OUTPUT_TYPES = {
+	1: 'MME',
+	3: 'WDM',
+	4: 'KS'
+}
+
+const additionalStripProps = [
+	'Reverb',
+	'Delay',
+	'Fx1',
+	'Fx2',
+	'PostReverb',
+	'PostDelay',
+	'PostFx1',
+	'PostFx2'
+].map(x => ({ value: x, label: x }))
+
+const additionalBusProps = [
+	'Sel',
+	'ReturnReverb',
+	'ReturnDelay',
+	'ReturnFx1',
+	'ReturnFx2'
+].map(x => ({ value: x, label: x }))
+
 const stripBusInput = [
 	{
 		label: 'Number',
@@ -8,13 +39,13 @@ const stripBusInput = [
 		type: INPUT_METHOD.INPUT_SELECT,
 		items: [
 			{ value: 0, label: '0' },
-			{ value: 0, label: '1' },
-			{ value: 0, label: '2' },
-			{ value: 0, label: '3' },
-			{ value: 0, label: '4' },
-			{ value: 0, label: '5' },
-			{ value: 0, label: '6' },
-			{ value: 0, label: '7' }
+			{ value: 1, label: '1' },
+			{ value: 2, label: '2' },
+			{ value: 3, label: '3' },
+			{ value: 4, label: '4' },
+			{ value: 5, label: '5' },
+			{ value: 6, label: '6' },
+			{ value: 7, label: '7' }
 		]
 	},
 	{
@@ -36,10 +67,10 @@ const INPUTS = [
 				label: 'Parameter',
 				ref: 'param',
 				type: INPUT_METHOD.INPUT_SELECT,
-				items: Object.keys(StripProperties).map(x => ({
-					value: StripProperties[x],
-					label: x
-				}))
+				items: [
+					...mapPropsToSelection(StripProperties),
+					...additionalStripProps
+				]
 			},
 			...stripBusInput
 		]
@@ -55,10 +86,10 @@ const INPUTS = [
 				label: 'Parameter',
 				ref: 'param',
 				type: INPUT_METHOD.INPUT_SELECT,
-				items: Object.keys(BusProperties).map(x => ({
-					value: BusProperties[x],
-					label: x
-				}))
+				items: [
+					...mapPropsToSelection(BusProperties),
+					...additionalBusProps
+				]
 			},
 			...stripBusInput
 		]
@@ -66,5 +97,6 @@ const INPUTS = [
 ];
 
 module.exports = {
-	INPUTS
+	INPUTS,
+	OUTPUT_TYPES
 };
