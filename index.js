@@ -8,12 +8,10 @@ class VoicemeeterControl extends Extension {
 		this.name = 'Voicemeeter Control';
 		this.platforms = [PLATFORMS.WINDOWS];
 		this.configs = null;
-		console.log('TEEEEEEASDASDASD')
-
+		this.inputs = INPUTS;
 	}
 
 	async initExtension() {
-		console.log('TEEEEEEASDASDASD initExtension')
 		try {
 			this.vm = await Voicemeeter.default.init();
 			this.vm.connect();
