@@ -141,7 +141,7 @@ const INPUTS = [
 	{
 		label: 'Toggle Strip Parameter',
 		value: 'vm-toggle-strip',
-		icon: 'volume-mute',
+		icon: 'microphone-slash',
 		fontIcon: 'fas',
 		color: '#171A21',
 		input: [
