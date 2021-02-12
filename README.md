@@ -3,6 +3,12 @@ Voicemeeter control extension for Deckboard
 
 Based on [ChewbaccaCookie](https://github.com/ChewbaccaCookie)'s [voicemeeter-connector](https://www.npmjs.com/package/voicemeeter-connector)
 
+## Actions
++ Set Strip/Bus Parameter
++ Toggle Strip/Bus Parameter
++ Increase Strip/Bus Parameter
++ Decrease Strip/Bus Parameter
+
 ## Build Instruction
 - Clone this repository in Users/%USER%/deckboard/extensions directory.
 `` git clone https://github.com/rivafarabi/deckboard-power-control.git ``
