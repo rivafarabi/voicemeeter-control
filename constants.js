@@ -70,6 +70,36 @@ const AdditionalBusProperties = [
 	'ReturnFx2'
 ]
 
+/**
+ * Strip props which can be toggled
+ *
+ * @type {string[]}
+ */
+const ToggleStripProperties = [
+    'Mono',
+    'Mute',
+    'Solo',
+    'A1',
+    'A2',
+    'A3',
+    'A4',
+    'A5',
+    'B1',
+    'B2',
+    'B3'
+];
+
+/**
+ * Bus props which can be toggled
+ *
+ * @type {string[]}
+ */
+const ToggleBusProperties = [
+    'Mono',
+    'Mute',
+    'EQ'
+];
+
 const INPUTS = [
 	{
 		label: 'Set Strip Parameter',
@@ -89,6 +119,19 @@ const INPUTS = [
 		]
 	},
 	{
+		label: 'Toggle Strip Parameter',
+		value: 'vm-toggle-strip',
+		icon: 'volume-mute',
+		fontIcon: 'fas',
+		color: '#171A21',
+		input: [
+			Object.assign({}, ParameterInput, {
+				items: mapArrayToSelection(ToggleStripProperties)
+			}),
+			IndexInput
+		]
+	},
+	{
 		label: 'Set Bus Parameter',
 		value: 'vm-set-bus',
 		icon: 'headphones',
@@ -104,7 +147,20 @@ const INPUTS = [
 			IndexInput,
 			ValueInput
 		]
-	}
+	},
+	{
+		label: 'Toggle Bus Parameter',
+		value: 'vm-toggle-bus',
+		icon: 'volume-mute',
+		fontIcon: 'fas',
+		color: '#171A21',
+		input: [
+			Object.assign({}, ParameterInput, {
+				items: mapArrayToSelection(ToggleBusProperties)
+			}),
+			IndexInput
+		]
+	},
 ];
 
 /**

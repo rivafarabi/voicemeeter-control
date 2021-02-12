@@ -69,8 +69,14 @@ class VoicemeeterControl extends Extension {
 			case 'vm-set-strip':
 				this.vm.setStripParameter(number, param, value);
 				break;
+			case 'vm-toggle-strip':
+				this.vm.setStripParameter(number, param, this.vm.getStripParameter(number, param) === 0 ? 1 : 0);
+				break;
 			case 'vm-set-bus':
 				this.vm.setBusParameter(number, param, value);
+				break;
+			case 'vm-toggle-bus':
+				this.vm.setBusParameter(number, param, this.vm.getBusParameter(number, param) === 0 ? 1 : 0);
 				break;
 			case 'vm-set-output':
 				const [a, b] = device.split(': ');
