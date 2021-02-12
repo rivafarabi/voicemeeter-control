@@ -90,6 +90,26 @@ const ToggleStripProperties = [
 ];
 
 /**
+ * Strip props which can be increased or decreased
+ *
+ * @type {string[]}
+ */
+const SliderStripProperties = [
+    'Gain',
+    'Comp',
+    'Gate'
+];
+
+/**
+ * Bus props which can be increased or decreased
+ *
+ * @type {string[]}
+ */
+const SliderBusProperties = [
+    'Gain'
+]
+
+/**
  * Bus props which can be toggled
  *
  * @type {string[]}
@@ -132,6 +152,34 @@ const INPUTS = [
 		]
 	},
 	{
+		label: 'Increase Strip Parameter',
+		value: 'vm-increase-strip',
+		icon: 'volume-up',
+		fontIcon: 'fas',
+		color: '#171A21',
+		input: [
+			Object.assign({}, ParameterInput, {
+				items: mapArrayToSelection(SliderStripProperties)
+			}),
+			IndexInput,
+			ValueInput
+		]
+	},
+	{
+		label: 'Decrease Strip Parameter',
+		value: 'vm-decrease-strip',
+		icon: 'volume-down',
+		fontIcon: 'fas',
+		color: '#171A21',
+		input: [
+			Object.assign({}, ParameterInput, {
+				items: mapArrayToSelection(SliderStripProperties)
+			}),
+			IndexInput,
+			ValueInput
+		]
+	},
+	{
 		label: 'Set Bus Parameter',
 		value: 'vm-set-bus',
 		icon: 'headphones',
@@ -161,6 +209,34 @@ const INPUTS = [
 			IndexInput
 		]
 	},
+	{
+		label: 'Increase Bus Parameter',
+		value: 'vm-increase-bus',
+		icon: 'volume-up',
+		fontIcon: 'fas',
+		color: '#171A21',
+		input: [
+			Object.assign({}, ParameterInput, {
+				items: mapArrayToSelection(SliderBusProperties)
+			}),
+			IndexInput,
+			ValueInput
+		]
+	},
+	{
+		label: 'Decrease Bus Parameter',
+		value: 'vm-decrease-bus',
+		icon: 'volume-down',
+		fontIcon: 'fas',
+		color: '#171A21',
+		input: [
+			Object.assign({}, ParameterInput, {
+				items: mapArrayToSelection(SliderBusProperties)
+			}),
+			IndexInput,
+			ValueInput
+		]
+	}
 ];
 
 /**
