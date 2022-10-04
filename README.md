@@ -9,6 +9,6 @@ Based on [ChewbaccaCookie](https://github.com/ChewbaccaCookie)'s [voicemeeter-co
 
 - Do ``npm install`` in newly created deckboard-power-control folder
 
-- Run ``npm rebuild --runtime=electron --target=4.0.0 --disturl=https://atom.io/download/atom-shell --abi=69``
+- Run ``npm rebuild --runtime=electron --target=4.2.7 --disturl=https://atom.io/download/atom-shell --abi=69``
 
 - Run ``npm run build``
