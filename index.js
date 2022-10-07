@@ -13,8 +13,10 @@ class VoicemeeterControl extends Extension {
 
 	async initExtension() {
 		try {
-			this.vm = await Voicemeeter.default.init();
-			this.vm.connect();
+			if (!this.vm) {
+				this.vm = await Voicemeeter.default.init();
+				this.vm.connect();
+			}
 			this.vm.updateDeviceList();
 			this.inputs = [
 				...INPUTS,
@@ -32,12 +34,12 @@ class VoicemeeterControl extends Extension {
 							items: this.vm.outputDevices.map(
 								({ name, type }) => ({
 									value: `${OUTPUT_TYPES[type]}: ${name}`,
-									label: `${OUTPUT_TYPES[type]}: ${name}`
+									label: `${OUTPUT_TYPES[type]}: ${name}`,
 								})
-							)
-						}
-					]
-				}
+							),
+						},
+					],
+				},
 			];
 		} catch (err) {
 			console.log('error', err);
@@ -54,53 +56,87 @@ class VoicemeeterControl extends Extension {
 							label: 'Devices',
 							ref: 'device',
 							type: INPUT_METHOD.INPUT_SELECT,
-							items: []
-						}
-					]
-				}
+							items: [],
+						},
+					],
+				},
 			];
 		}
 	}
 
-	execute(action, { number, param, value, device }) {
-		if (!this.vm || !this.vm.isConnected) return;
+	// Executes everytime the button creation modal pops up.
+	async update() {
+		if (!this.vm || !this.vm.isConnected) return this.initExtension();
+	}
 
-		switch (action) {
-			case 'vm-set-strip':
-				this.vm.setStripParameter(number, param, value);
-				break;
-			case 'vm-toggle-strip':
-				this.vm.setStripParameter(number, param, this.vm.getStripParameter(number, param) === 0 ? 1 : 0);
-				break;
-			case 'vm-increase-strip':
-				this.vm.setStripParameter(number, param, parseFloat(this.vm.getStripParameter(number, param)) + parseFloat(value));
-				break;
-			case 'vm-decrease-strip':
-				this.vm.setStripParameter(number, param, parseFloat(this.vm.getStripParameter(number, param)) - parseFloat(value));
-				break;
-			case 'vm-set-bus':
-				this.vm.setBusParameter(number, param, value);
-				break;
-			case 'vm-toggle-bus':
-				this.vm.setBusParameter(number, param, this.vm.getBusParameter(number, param) === 0 ? 1 : 0);
-				break;
-			case 'vm-increase-bus':
-				this.vm.setBusParameter(number, param, parseFloat(this.vm.getBusParameter(number, param)) + value);
-				break;
-			case 'vm-decrease-bus':
-				this.vm.setBusParameter(number, param, parseFloat(this.vm.getBusParameter(number, param)) - value);
-				break;
-			case 'vm-set-output':
-				const [a, b] = device.split(': ');
-				console.log(b);
-				console.log('Device.' + a.toLowerCase());
-				this.vm.setBusParameter(
-					0,
-					'Device.' + a.toLowerCase(),
-					`"${b}"`
-				);
-			default:
-				break;
+	execute(action, { number, param, value, device }) {
+		try {
+			switch (action) {
+				case 'vm-set-strip':
+					this.vm.setStripParameter(number, param, value);
+					break;
+				case 'vm-toggle-strip':
+					this.vm.setStripParameter(
+						number,
+						param,
+						this.vm.getStripParameter(number, param) === 0 ? 1 : 0
+					);
+					break;
+				case 'vm-increase-strip':
+					this.vm.setStripParameter(
+						number,
+						param,
+						parseFloat(this.vm.getStripParameter(number, param)) +
+							parseFloat(value)
+					);
+					break;
+				case 'vm-decrease-strip':
+					this.vm.setStripParameter(
+						number,
+						param,
+						parseFloat(this.vm.getStripParameter(number, param)) -
+							parseFloat(value)
+					);
+					break;
+				case 'vm-set-bus':
+					this.vm.setBusParameter(number, param, value);
+					break;
+				case 'vm-toggle-bus':
+					this.vm.setBusParameter(
+						number,
+						param,
+						this.vm.getBusParameter(number, param) === 0 ? 1 : 0
+					);
+					break;
+				case 'vm-increase-bus':
+					this.vm.setBusParameter(
+						number,
+						param,
+						parseFloat(this.vm.getBusParameter(number, param)) +
+							value
+					);
+					break;
+				case 'vm-decrease-bus':
+					this.vm.setBusParameter(
+						number,
+						param,
+						parseFloat(this.vm.getBusParameter(number, param)) -
+							value
+					);
+					break;
+				case 'vm-set-output':
+					const [a, b] = device.split(': ');
+
+					this.vm.setBusParameter(
+						0,
+						'Device.' + a.toLowerCase(),
+						`"${b}"`
+					);
+				default:
+					break;
+			}
+		} catch (err) {
+			console.log(err);
 		}
 	}
 }
