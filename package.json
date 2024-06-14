@@ -1,17 +1,17 @@
 {
   "name": "voicemeeter-control",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Control Voicemeeter through Deckboard",
   "main": "index.js",
   "scripts": {
     "build": "deckboard-kit --build",
-    "install": "deckboard-kit --install"
+    "install-extension": "deckboard-kit --install"
   },
   "author": "Riva Farabi",
   "license": "MIT",
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "deckboard-kit": "^0.3.0",
-    "voicemeeter-connector": "^0.6.2"
+    "voicemeeter-connector": "rivafarabi/voicemeeter-connector#main"
   }
 }

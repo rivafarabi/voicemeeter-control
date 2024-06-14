@@ -7,11 +7,11 @@ const { BusProperties, StripProperties } = require('voicemeeter-connector');
  * @return {ButtonInput}
  */
 const ParameterInput = {
-    label: 'Parameter',
-    ref: 'param',
-    type: INPUT_METHOD.INPUT_SELECT,
-    items: []
-}
+	label: 'Parameter',
+	ref: 'param',
+	type: INPUT_METHOD.INPUT_SELECT,
+	items: [],
+};
 
 /**
  * Index input
@@ -19,20 +19,20 @@ const ParameterInput = {
  * @type {ButtonInput}
  */
 const IndexInput = {
-    label: 'Index',
-    ref: 'number',
-    type: INPUT_METHOD.INPUT_SELECT,
-    items: [
-        { value: 0, label: '0' },
-        { value: 1, label: '1' },
-        { value: 2, label: '2' },
-        { value: 3, label: '3' },
-        { value: 4, label: '4' },
-        { value: 5, label: '5' },
-        { value: 6, label: '6' },
-        { value: 7, label: '7' }
-    ]
-}
+	label: 'Index',
+	ref: 'number',
+	type: INPUT_METHOD.INPUT_SELECT,
+	items: [
+		{ value: 0, label: '0' },
+		{ value: 1, label: '1' },
+		{ value: 2, label: '2' },
+		{ value: 3, label: '3' },
+		{ value: 4, label: '4' },
+		{ value: 5, label: '5' },
+		{ value: 6, label: '6' },
+		{ value: 7, label: '7' },
+	],
+};
 
 /**
  * Value input
@@ -40,16 +40,16 @@ const IndexInput = {
  * @type {ButtonInput}
  */
 const ValueInput = {
-    label: 'Value',
-    ref: 'value',
-    type: INPUT_METHOD.INPUT_TEXT
-}
+	label: 'Value',
+	ref: 'value',
+	type: INPUT_METHOD.INPUT_TEXT,
+};
 
 const OUTPUT_TYPES = {
 	1: 'MME',
 	3: 'WDM',
-	4: 'KS'
-}
+	4: 'KS',
+};
 
 const AdditionalStripProperties = [
 	'Reverb',
@@ -59,16 +59,16 @@ const AdditionalStripProperties = [
 	'PostReverb',
 	'PostDelay',
 	'PostFx1',
-	'PostFx2'
-]
+	'PostFx2',
+];
 
 const AdditionalBusProperties = [
 	'Sel',
 	'ReturnReverb',
 	'ReturnDelay',
 	'ReturnFx1',
-	'ReturnFx2'
-]
+	'ReturnFx2',
+];
 
 /**
  * Strip props which can be toggled
@@ -76,17 +76,17 @@ const AdditionalBusProperties = [
  * @type {string[]}
  */
 const ToggleStripProperties = [
-    'Mono',
-    'Mute',
-    'Solo',
-    'A1',
-    'A2',
-    'A3',
-    'A4',
-    'A5',
-    'B1',
-    'B2',
-    'B3'
+	'Mono',
+	'Mute',
+	'Solo',
+	'A1',
+	'A2',
+	'A3',
+	'A4',
+	'A5',
+	'B1',
+	'B2',
+	'B3',
 ];
 
 /**
@@ -94,31 +94,21 @@ const ToggleStripProperties = [
  *
  * @type {string[]}
  */
-const SliderStripProperties = [
-    'Gain',
-    'Comp',
-    'Gate'
-];
+const SliderStripProperties = ['Gain', 'Comp', 'Gate'];
 
 /**
  * Bus props which can be increased or decreased
  *
  * @type {string[]}
  */
-const SliderBusProperties = [
-    'Gain'
-]
+const SliderBusProperties = ['Gain'];
 
 /**
  * Bus props which can be toggled
  *
  * @type {string[]}
  */
-const ToggleBusProperties = [
-    'Mono',
-    'Mute',
-    'EQ'
-];
+const ToggleBusProperties = ['Mono', 'Mute', 'EQ'];
 
 const INPUTS = [
 	{
@@ -131,12 +121,12 @@ const INPUTS = [
 			Object.assign({}, ParameterInput, {
 				items: [
 					...mapObjectToSelection(StripProperties),
-					...mapArrayToSelection(AdditionalStripProperties)
-				]
+					...mapArrayToSelection(AdditionalStripProperties),
+				],
 			}),
 			IndexInput,
-			ValueInput
-		]
+			ValueInput,
+		],
 	},
 	{
 		label: 'Toggle Strip Parameter',
@@ -146,10 +136,10 @@ const INPUTS = [
 		color: '#171A21',
 		input: [
 			Object.assign({}, ParameterInput, {
-				items: mapArrayToSelection(ToggleStripProperties)
+				items: mapArrayToSelection(ToggleStripProperties),
 			}),
-			IndexInput
-		]
+			IndexInput,
+		],
 	},
 	{
 		label: 'Increase Strip Parameter',
@@ -159,11 +149,11 @@ const INPUTS = [
 		color: '#171A21',
 		input: [
 			Object.assign({}, ParameterInput, {
-				items: mapArrayToSelection(SliderStripProperties)
+				items: mapArrayToSelection(SliderStripProperties),
 			}),
 			IndexInput,
-			ValueInput
-		]
+			ValueInput,
+		],
 	},
 	{
 		label: 'Decrease Strip Parameter',
@@ -173,11 +163,11 @@ const INPUTS = [
 		color: '#171A21',
 		input: [
 			Object.assign({}, ParameterInput, {
-				items: mapArrayToSelection(SliderStripProperties)
+				items: mapArrayToSelection(SliderStripProperties),
 			}),
 			IndexInput,
-			ValueInput
-		]
+			ValueInput,
+		],
 	},
 	{
 		label: 'Set Bus Parameter',
@@ -189,12 +179,12 @@ const INPUTS = [
 			Object.assign({}, ParameterInput, {
 				items: [
 					...mapObjectToSelection(BusProperties),
-					...mapArrayToSelection(AdditionalBusProperties)
-				]
+					...mapArrayToSelection(AdditionalBusProperties),
+				],
 			}),
 			IndexInput,
-			ValueInput
-		]
+			ValueInput,
+		],
 	},
 	{
 		label: 'Toggle Bus Parameter',
@@ -204,10 +194,10 @@ const INPUTS = [
 		color: '#171A21',
 		input: [
 			Object.assign({}, ParameterInput, {
-				items: mapArrayToSelection(ToggleBusProperties)
+				items: mapArrayToSelection(ToggleBusProperties),
 			}),
-			IndexInput
-		]
+			IndexInput,
+		],
 	},
 	{
 		label: 'Increase Bus Parameter',
@@ -217,11 +207,11 @@ const INPUTS = [
 		color: '#171A21',
 		input: [
 			Object.assign({}, ParameterInput, {
-				items: mapArrayToSelection(SliderBusProperties)
+				items: mapArrayToSelection(SliderBusProperties),
 			}),
 			IndexInput,
-			ValueInput
-		]
+			ValueInput,
+		],
 	},
 	{
 		label: 'Decrease Bus Parameter',
@@ -231,12 +221,43 @@ const INPUTS = [
 		color: '#171A21',
 		input: [
 			Object.assign({}, ParameterInput, {
-				items: mapArrayToSelection(SliderBusProperties)
+				items: mapArrayToSelection(SliderBusProperties),
 			}),
 			IndexInput,
-			ValueInput
-		]
-	}
+			ValueInput,
+		],
+	},
+	//Sliders
+	{
+		label: 'Strip Slider Control',
+		value: 'vm-strip-slider',
+		keyTemplaate: 'vm-strip-slider-{param}-{number}',
+		mode: 'slider',
+		icon: 'volume-up',
+		fontIcon: 'fas',
+		color: '#171A21',
+		input: [
+			Object.assign({}, ParameterInput, {
+				items: mapArrayToSelection(SliderStripProperties),
+			}),
+			IndexInput,
+		],
+	},
+	{
+		label: 'Bus Slider Control',
+		value: 'vm-bus-slider',
+		keyTemplaate: 'vm-bus-slider-{param}-{number}',
+		mode: 'slider',
+		icon: 'volume-up',
+		fontIcon: 'fas',
+		color: '#171A21',
+		input: [
+			Object.assign({}, ParameterInput, {
+				items: mapArrayToSelection(SliderBusProperties),
+			}),
+			IndexInput,
+		],
+	},
 ];
 
 /**
@@ -249,8 +270,8 @@ function mapArrayToSelection(props) {
 	return props.map(function (x) {
 		return {
 			value: x,
-			label: x
-		}
+			label: x,
+		};
 	});
 }
 
@@ -261,13 +282,13 @@ function mapArrayToSelection(props) {
  * @return {array<object>}
  */
 function mapObjectToSelection(props) {
-	return Object.keys(props).map(x => ({
+	return Object.keys(props).map((x) => ({
 		value: props[x],
-		label: x
-	}))
+		label: x,
+	}));
 }
 
 module.exports = {
 	INPUTS,
-	OUTPUT_TYPES
+	OUTPUT_TYPES,
 };
