@@ -1,8 +1,13 @@
 const { Extension, log, INPUT_METHOD, PLATFORMS } = require('deckboard-kit');
 const { INPUTS, OUTPUT_TYPES } = require('./constants');
-const Voicemeeter = require('voicemeeter-connector');
+const { Voicemeeter } = require('voicemeeter-connector');
 
 class VoicemeeterControl extends Extension {
+	/**
+	 * @type {Voicemeeter}
+	 */
+	vm;
+
 	constructor() {
 		super();
 		this.name = 'Voicemeeter Control';
@@ -14,7 +19,7 @@ class VoicemeeterControl extends Extension {
 	async initExtension() {
 		try {
 			if (!this.vm) {
-				this.vm = await Voicemeeter.default.init();
+				this.vm = await Voicemeeter.init();
 				this.vm.connect();
 			}
 			this.vm.updateDeviceList();
@@ -41,8 +46,9 @@ class VoicemeeterControl extends Extension {
 					],
 				},
 			];
+
+			this.vm.attachChangeEvent(() => {});
 		} catch (err) {
-			console.log('error', err);
 			this.inputs = [
 				...INPUTS,
 				{
@@ -69,7 +75,9 @@ class VoicemeeterControl extends Extension {
 		if (!this.vm || !this.vm.isConnected) return this.initExtension();
 	}
 
-	execute(action, { number, param, value, device }) {
+	async execute(action, { number, param, value, device }) {
+		if (!this.vm || !this.vm.isConnected) await this.initExtension();
+
 		try {
 			switch (action) {
 				case 'vm-set-strip':
