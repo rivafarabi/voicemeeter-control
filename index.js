@@ -87,7 +87,7 @@ class VoicemeeterControl extends Extension {
 					this.vm.setStripParameter(
 						number,
 						param,
-						this.vm.getStripParameter(number, param) === 0 ? 1 : 0
+						Math.round(this.vm.getStripParameter(number, param)) === 0 ? 1 : 0
 					);
 					break;
 				case 'vm-increase-strip':
@@ -113,7 +113,7 @@ class VoicemeeterControl extends Extension {
 					this.vm.setBusParameter(
 						number,
 						param,
-						this.vm.getBusParameter(number, param) === 0 ? 1 : 0
+						Math.round(this.vm.getBusParameter(number, param)) === 0 ? 1 : 0
 					);
 					break;
 				case 'vm-increase-bus':
